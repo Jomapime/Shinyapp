@@ -1,9 +1,4 @@
 #
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
 #    http://shiny.rstudio.com/
 #
 
@@ -18,11 +13,11 @@ library(shinythemes)
 
 
 Base2 <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQSVGsfo-35qnY13X4EC8-vxOrilvfGQrvGP7MrGKWyEW89MteLL_Xa9yRheW6yNjP1Npn01dK8H6tm/pub?output=csv")
-Base2 = Base2[,-6]
+Base2 <- Base2[,-6]
 
-Localidades = count(Base2,Localidad)
+Localidades <- count(Base2,Localidad)
 
-Estratos = count(Base2,Estrato)
+Estratos <- count(Base2,Estrato)
 
 Nueva <- count(Base2,Localidad, Estrato)
 
@@ -35,13 +30,13 @@ full$Pais <- recode(full$Pais, "Tanzania" = "United Republic of Tanzania")
 full$Pais <- recode(full$Pais, "Congo" = "Republic of Congo")
 
 
-WORLD = get_data_from_map(download_map_data("custom/world-palestine"))
+WORLD <- get_data_from_map(download_map_data("custom/world-palestine"))
 
-Mundo = WORLD%>%
+Mundo <- WORLD%>%
     select(Pais = "name")
 
 
-Total = merge(full,Mundo, by="Pais" )
+Total <- merge(full,Mundo, by="Pais" )
 
 Total_Mundo = Total%>%
     filter(date == "2020-11-27")%>%
@@ -51,7 +46,8 @@ Total_Mundo = Total%>%
 
 
 mapdata <- get_data_from_map(download_map_data("countries/co/co-all"))
-Colombia = mapdata%>%
+
+Colombia <- mapdata%>%
     select(Departamento = "name")%>%
     mutate(x=c(1:34))
 
