@@ -1,4 +1,9 @@
 #
+# This is a Shiny web application. You can run the application by clicking
+# the 'Run App' button above.
+#
+# Find out more about building applications with Shiny here:
+#
 #    http://shiny.rstudio.com/
 #
 
@@ -6,7 +11,6 @@ library(shiny)
 library(readr)
 library(rsconnect)
 library(dplyr)
-library(highcharter)
 library(shinythemes)
 
 #source("./global.R",encoding = "utf-8")
@@ -29,6 +33,9 @@ full$Pais <- recode(full$Pais, "Democratic Republic of Congo" = "Democratic Repu
 full$Pais <- recode(full$Pais, "Tanzania" = "United Republic of Tanzania")
 full$Pais <- recode(full$Pais, "Congo" = "Republic of Congo")
 
+#remotes::install_github("jbkunst/highcharter")
+
+library(highcharter) 
 
 WORLD <- get_data_from_map(download_map_data("custom/world-palestine"))
 
@@ -157,7 +164,7 @@ server <- function(input, output) {
                 )) %>%
             # Axis
             hc_yAxis(
-                title = list(text = "¿Donde viven los encuestados?"),
+                title = list(text = "Â¿Donde viven los encuestados?"),
                 labels = list(format = "{value}")
             ) %>%
             hc_xAxis(categories = Localidades$Localidad) %>%
